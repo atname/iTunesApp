@@ -23,7 +23,7 @@
             android:id="@+id/name"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="smallMargin"
+            android:layout_marginStart="@dimen/smallMargin"
             android:layout_marginTop="@dimen/middleMargin"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_test"
