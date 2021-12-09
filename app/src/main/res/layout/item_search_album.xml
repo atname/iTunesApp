@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardViewTheme"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/album_avatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="smallMargin"
+            android:layout_marginTop="@dimen/middleMargin"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_test"
+            android:maxLines="1"
+            android:textColor="#353434"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.004"
+            app:layout_constraintStart_toEndOf="@+id/album_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="wrap"
+            tools:text="Stoney" />
+
+        <TextView
+            android:id="@+id/artistName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/regular"
+            android:textColor="#666666"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/album_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="Post Malone" />
+
+        <TextView
+            android:id="@+id/trackCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/semibold"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/genre"
+            app:layout_constraintStart_toEndOf="@+id/genre"
+            app:layout_constraintTop_toTopOf="@+id/genre"
+            tools:text="Tracks: 12" />
+
+        <TextView
+            android:id="@+id/genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="@dimen/largeMargin"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/semibold"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/album_avatar"
+            tools:text="Genre: Rap" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

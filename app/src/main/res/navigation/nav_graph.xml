@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/search_fragment">
+
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="com.atname.itunesapp.fragments.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/toAlbumFragment"
+            app:destination="@+id/album_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/album_fragment"
+        android:name="com.atname.itunesapp.fragments.AlbumFragment"
+        android:label="Album"
+        tools:layout="@layout/fragment_album">
+
+        <argument
+            android:name="albumId"
+            app:argType="string"
+            android:defaultValue="1440634155" />
+
+        <action
+            android:id="@+id/toSearchFragment"
+            app:destination="@+id/album_fragment">
+
+            <argument
+                android:name="albumId"
+                android:defaultValue="1440634155"
+                app:argType="string" />
+        </action>
+    </fragment>
+</navigation>
