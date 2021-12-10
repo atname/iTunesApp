@@ -5,16 +5,12 @@ import androidx.navigation.NavController
 import com.atname.itunesapp.R
 
 class AppRouter {
-    var navController: NavController? = null
+    lateinit var navController: NavController
 
     fun toAlbumFragment(id:String){
         val bundle = Bundle()
         bundle.putString("albumId",id)
-        navController!!.navigate(R.id.toAlbumFragment, bundle)
-    }
-
-    fun toSearchFragment(){
-        navController?.navigate(R.id.toSearchFragment)
+        navController.navigate(R.id.toAlbumFragment, bundle)
     }
 }
 

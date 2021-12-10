@@ -9,6 +9,7 @@ import kotlinx.coroutines.*
 import retrofit2.HttpException
 import java.util.*
 import kotlin.Comparator
+import kotlin.properties.Delegates
 
 class AlbumsPagingDataSource(
     private val apiService: ApiService,
@@ -19,8 +20,7 @@ class AlbumsPagingDataSource(
         if (query.isBlank()) {
             return LoadResult.Page(emptyList(), prevKey = null, nextKey = null)
         }
-
-        var loadResult: LoadResult<Int, AlbumItemDto>? = null
+        lateinit var loadResult: LoadResult<Int, AlbumItemDto>
 
         coroutineScope {
             val pageNumber = params.key ?: 1
@@ -30,6 +30,7 @@ class AlbumsPagingDataSource(
                     try {
                         val response = apiService.searchAlbums(query,"album")
                         return@async if (response.isSuccessful) {
+
                             val bodyResponse = response.body()!!.results
 
                             val nextKey = if (response.body()?.results!!.isEmpty()) null else pageNumber + 1
@@ -39,7 +40,7 @@ class AlbumsPagingDataSource(
                                 Collections.sort(bodyResponse
                                 ) { s1, s2 ->
                                     s1.collectionName.compareTo(
-                                        s2!!.collectionName,
+                                        s2.collectionName,
                                         ignoreCase = true
                                     )
                                 }
@@ -55,7 +56,7 @@ class AlbumsPagingDataSource(
                 }
             loadResult = defResponse.await()
         }
-        return loadResult!!
+        return loadResult
     }
 
     override fun getRefreshKey(state: PagingState<Int, AlbumItemDto>): Int? {

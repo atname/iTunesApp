@@ -18,6 +18,7 @@ import com.atname.itunesapp.viewmodels.ViewModelEvent
 import com.atname.itunesapp.adapter.AdapterItemClickListener
 import com.atname.itunesapp.adapter.FooterAdapter
 import com.atname.itunesapp.adapter.SearchAdapter
+import com.atname.itunesapp.adapter.SongsListAdapter
 import com.atname.itunesapp.databinding.FragmentSearchBinding
 import com.atname.itunesapp.model.AlbumItemDto
 import com.atname.itunesapp.viewmodels.SearchViewModel
@@ -33,7 +34,7 @@ class SearchFragment : Fragment(), AdapterItemClickListener {
 
     private val viewModel: SearchViewModel by viewModels()
 
-    private val adapter by lazy { activity?.let { SearchAdapter(this) } }
+    private lateinit var adapter : SearchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,8 +46,8 @@ class SearchFragment : Fragment(), AdapterItemClickListener {
             container,
             false
         )
-
-        binding.recycler.adapter = adapter?.withLoadStateFooter(FooterAdapter { adapter?.retry() })
+        adapter = SearchAdapter(this)
+        binding.recycler.adapter = adapter.withLoadStateFooter(FooterAdapter { adapter.retry() })
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
         setupObservers()
@@ -80,7 +81,7 @@ class SearchFragment : Fragment(), AdapterItemClickListener {
             }
             lifecycleScope.launch(Dispatchers.IO) {
                 viewModel.searchResultFlow?.collect {
-                    adapter!!.submitData(it)
+                    adapter.submitData(it)
                 }
             }
         })
@@ -91,7 +92,7 @@ class SearchFragment : Fragment(), AdapterItemClickListener {
     }
 
     private fun adapterStateListener() {
-        adapter?.addLoadStateListener {
+        adapter.addLoadStateListener {
             when (it.refresh) {
                 is LoadState.NotLoading -> {
                     binding.progressIndicator.visibility = View.INVISIBLE

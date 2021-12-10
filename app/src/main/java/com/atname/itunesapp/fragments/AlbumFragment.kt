@@ -27,7 +27,7 @@ class AlbumFragment : Fragment() {
 
     private val viewModel: AlbumViewModel by viewModels()
 
-    private val adapter by lazy { activity?.let { SongsListAdapter() } }
+    private lateinit var adapter : SongsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,7 @@ class AlbumFragment : Fragment() {
             container,
             false
         )
-
+        adapter = SongsListAdapter()
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
@@ -55,17 +55,17 @@ class AlbumFragment : Fragment() {
 
         lifecycleScope.launch(Dispatchers.Main) {
             viewModel.songsFlow.observe(viewLifecycleOwner,{
-                adapter?.dataSet = it
+                adapter.dataSet = it
 
-                val releaseDate = dateFormat.format(adapter!!.dataSet[0].releaseDate)
+                val releaseDate = dateFormat.format(adapter.dataSet[0].releaseDate)
 
-                binding.albumName.text = adapter!!.dataSet[0].collectionName
-                binding.artistName.text = adapter!!.dataSet[0].artistName
-                binding.trackCount.text = "Tracks: ".plus(adapter!!.dataSet[0].trackCount)
+                binding.albumName.text = adapter.dataSet[0].collectionName
+                binding.artistName.text = adapter.dataSet[0].artistName
+                binding.trackCount.text = "Tracks: ".plus(adapter.dataSet[0].trackCount)
                 binding.releaseDate.text = "Release date: $releaseDate"
 
                 Picasso.get()
-                    .load(adapter!!.dataSet[0].artworkUrl100)
+                    .load(adapter.dataSet[0].artworkUrl100)
                     .placeholder(R.drawable.card_view)
                     .error(R.drawable.logo)
                     .fit()
