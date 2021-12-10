@@ -16,13 +16,13 @@
             android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/middleMargin"
             android:ellipsize="end"
             android:fontFamily="@font/regular"
             android:gravity="center"
             android:lines="1"
             android:textColor="#353434"
             android:textSize="@dimen/largeTextSize"
-            android:layout_marginEnd="@dimen/middleMargin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -44,6 +44,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="wrap"
             tools:text="Big Lie" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

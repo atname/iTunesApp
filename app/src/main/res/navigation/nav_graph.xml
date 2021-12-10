@@ -28,11 +28,6 @@
         <action
             android:id="@+id/toSearchFragment"
             app:destination="@+id/album_fragment">
-
-            <argument
-                android:name="albumId"
-                android:defaultValue="1440634155"
-                app:argType="string" />
         </action>
     </fragment>
 </navigation>
